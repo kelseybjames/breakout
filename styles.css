@@ -34,3 +34,28 @@
   position: absolute;
   border: 1px solid black;
 }
+
+.top-border {
+  height: 1px;
+  width: 800px;
+}
+
+.bottom-border {
+  height: 1px;
+  width: 800px;
+  top: 600px;
+}
+
+.left-border {
+  height: 600px;
+  width: 0;
+  top: 0;
+  left: 0;
+}
+
+.right-border {
+  height: 600px;
+  width: 0;
+  top: 0;
+  left: 800px;
+}

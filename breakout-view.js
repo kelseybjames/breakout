@@ -52,11 +52,24 @@ var view = {
     }, 100);
 
     var collisionIntervalId = setInterval(function() {
+      var $ballDiv = $('.ball');
       borderCollision = controller.checkBorderCollision();
       brickCollision = controller.checkBrickCollision();
 
       if (borderCollision) {
-        horizontal *= -1;
+        var ballLeft = parseInt($ballDiv.css('left'));
+        var ballTop = parseInt($ballDiv.css('top'));
+        console.log(ballLeft);
+        console.log(ballTop);
+        if (ballLeft > 800) {
+          horizontal = -1;
+        } else if (ballLeft < 0) {
+          horizontal = 1;
+        } else if (ballTop > 600) {
+          vertical = -1;
+        } else if (ballTop < 0) {
+          vertical = 1;
+        };
       };
 
       switch (brickCollision) {

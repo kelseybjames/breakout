@@ -14,13 +14,13 @@ var controller = {
   checkBorderCollision: function() {
     var $ballDiv = $('.ball');
     var $gameDiv = $('.breakout-container');
-    console.log('border collision: ' + !(directedCollision($ballDiv, $gameDiv)));
+    // console.log('border collision: ' + !(directedCollision($ballDiv, $gameDiv)));
     return !(collision($ballDiv, $gameDiv));
   },
 
   checkBrickCollision: function() {
     var $ballDiv = $('.ball');
-    var $brickDiv = $('.ball');
+    var $brickDiv = $('.brick');
     return directedCollision($ballDiv, $brickDiv);
   },
 
