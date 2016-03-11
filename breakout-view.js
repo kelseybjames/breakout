@@ -49,25 +49,26 @@ var view = {
       var left = parseInt($ballDiv.css('left'));
       $ballDiv.css( 'left', left + (horizontal * 10 ));
       $ballDiv.css( 'top', top + (vertical * 10 ));
-    }, 100);
+    }, 40);
 
     var collisionIntervalId = setInterval(function() {
       var $ballDiv = $('.ball');
       borderCollision = controller.checkBorderCollision();
       brickCollision = controller.checkBrickCollision();
+      paddleCollision = controller.checkPaddleCollision();
 
       if (borderCollision) {
         var ballLeft = parseInt($ballDiv.css('left'));
         var ballTop = parseInt($ballDiv.css('top'));
         console.log(ballLeft);
         console.log(ballTop);
-        if (ballLeft > 800) {
+        if (ballLeft > 760) {
           horizontal = -1;
-        } else if (ballLeft < 0) {
+        } else if (ballLeft < 40) {
           horizontal = 1;
-        } else if (ballTop > 600) {
+        } else if (ballTop > 560) {
           vertical = -1;
-        } else if (ballTop < 0) {
+        } else if (ballTop < 40) {
           vertical = 1;
         };
       };
@@ -87,6 +88,10 @@ var view = {
           break;
         default:
           break;
+      }
+
+      if (paddleCollision) {
+        vertical = -1;
       }
     }, 100);
   },

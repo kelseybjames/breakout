@@ -24,6 +24,12 @@ var controller = {
     return directedCollision($ballDiv, $brickDiv);
   },
 
+  checkPaddleCollision: function() {
+    var $ballDiv = $('.ball');
+    var $paddleDiv = $('.paddle');
+    return collision($ballDiv, $paddleDiv);
+  },
+
   deleteBrick: function(brick) {
     model.brickArray[brick.id] = undefined;
   }, 
