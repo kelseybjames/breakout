@@ -1,0 +1,33 @@
+.breakout-container {
+  background-color: #a4b3df;
+  position: relative;
+  height: 600px;
+  width: 800px;
+}
+
+.ball {
+  border-radius: 15px;
+  background-color: red;
+  height: 30px;
+  width: 30px;
+  top: 470px;
+  left: 350px;
+  position: absolute;
+}
+
+.paddle {
+  background-color: black;
+  height: 20px;
+  width: 120px;
+  top: 500px;
+  left: 300px;
+  position: absolute;
+}
+
+.brick {
+  background-color: #663498;
+  height: 25px;
+  width: 50px;
+  position: absolute;
+  border: 1px solid black;
+}
