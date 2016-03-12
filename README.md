@@ -1,1 +1,1 @@
-[Here](https://rawgit.com/kelseybjames/breakout/master/breakout.html)
+Play the game [here](https://rawgit.com/kelseybjames/breakout/master/breakout.html)
