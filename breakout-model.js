@@ -1,5 +1,7 @@
 var model = {
   brickArray: [],
+  playerOneScore: 0,
+  playerTwoScore: 0,
 
   generateBricks: function() {
     var defaultTop = 50;

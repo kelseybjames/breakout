@@ -14,19 +14,28 @@ var controller = {
   checkBorderCollision: function() {
     var $ballDiv = $('.ball');
     var $gameDiv = $('.breakout-container');
-    // console.log('border collision: ' + !(directedCollision($ballDiv, $gameDiv)));
     return !(collision($ballDiv, $gameDiv));
   },
 
   checkBrickCollision: function() {
     var $ballDiv = $('.ball');
     var $brickDiv = $('.brick');
-    return directedCollision($ballDiv, $brickDiv);
+    $brickDiv.each(function() {
+      if (directedCollision($ballDiv, $(this))) {
+        return (directedCollision($ballDiv, $(this)));
+      };
+    })
   },
 
-  checkPaddleCollision: function() {
+  checkPaddleOneCollision: function() {
     var $ballDiv = $('.ball');
-    var $paddleDiv = $('.paddle');
+    var $paddleDiv = $('.player-1');
+    return collision($ballDiv, $paddleDiv);
+  },
+
+  checkPaddleTwoCollision: function() {
+    var $ballDiv = $('.ball');
+    var $paddleDiv = $('.player-2');
     return collision($ballDiv, $paddleDiv);
   },
 
@@ -39,11 +48,13 @@ var controller = {
   },
 
   init: function() {
-    model.generateBricks();
+    // model.generateBricks();
     brickArray = model.brickArray;
     ball = model.generateBall();
     view.init(brickArray, ball);
-    view.movePaddle();
+    view.movePaddleOne();
+    view.movePaddleTwo();
     view.moveBall(ball);
+    view.updateScore();
   },
 }

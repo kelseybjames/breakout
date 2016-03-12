@@ -11,14 +11,21 @@ var view = {
     $ballDiv = $('.ball');
     return (!collision($boardDiv, $ballDiv));
   },
+
+  updateScore: function() {
+    var refreshScoreInterval = setInterval(function() {
+      $('.score-1').html(model.playerOneScore);
+      $('.score-2').html(model.playerTwoScore);
+    }, 100);
+  },
   
-  movePaddle: function() {
+  movePaddleOne: function() {
 
     window.addEventListener('keydown', function(eventObject) {
       pressedKey = eventObject.code;
       
       refreshIntervalId = setTimeout(function() {
-        var $paddleDiv = $('.paddle');
+        var $paddleDiv = $('.player-1');
         var left = parseInt($paddleDiv.css('left'));
 
         switch (pressedKey) {
@@ -27,6 +34,32 @@ var view = {
           break;
 
         case 'ArrowLeft':
+          $paddleDiv.css( 'left', Math.max(left - 15, 0 ));
+          break;
+        
+        default:    
+          break;
+      };
+    }, 10);
+ 
+    });
+  },
+
+  movePaddleTwo: function() {
+
+    window.addEventListener('keypress', function(eventObject) {
+      pressedKey = eventObject.code;
+      
+      refreshIntervalId = setTimeout(function() {
+        var $paddleDiv = $('.player-2');
+        var left = parseInt($paddleDiv.css('left'));
+
+        switch (pressedKey) {
+        case 'KeyD':
+          $paddleDiv.css( 'left', Math.min(left + 15, 680 ));
+          break;
+
+        case 'KeyA':
           $paddleDiv.css( 'left', Math.max(left - 15, 0 ));
           break;
         
@@ -47,51 +80,60 @@ var view = {
       var $ballDiv = $('.ball');
       var top = parseInt($ballDiv.css('top'));
       var left = parseInt($ballDiv.css('left'));
-      $ballDiv.css( 'left', left + (horizontal * 10 ));
-      $ballDiv.css( 'top', top + (vertical * 10 ));
-    }, 40);
+      $ballDiv.css( 'left', left + (horizontal * 10));
+      $ballDiv.css( 'top', top + (vertical * 10));
+    }, 50);
 
     var collisionIntervalId = setInterval(function() {
       var $ballDiv = $('.ball');
       borderCollision = controller.checkBorderCollision();
       brickCollision = controller.checkBrickCollision();
-      paddleCollision = controller.checkPaddleCollision();
+      paddleOneCollision = controller.checkPaddleOneCollision();
+      paddleTwoCollision = controller.checkPaddleTwoCollision();
 
       if (borderCollision) {
         var ballLeft = parseInt($ballDiv.css('left'));
         var ballTop = parseInt($ballDiv.css('top'));
-        console.log(ballLeft);
-        console.log(ballTop);
-        if (ballLeft > 760) {
+        if ((ballLeft > 760) && (horizontal === 1)) {
           horizontal = -1;
-        } else if (ballLeft < 40) {
+        } else if ((ballLeft < 40) && (horizontal === -1)){
           horizontal = 1;
-        } else if (ballTop > 560) {
+        } else if ((ballTop > 560) && (vertical === 1)) {
           vertical = -1;
-        } else if (ballTop < 40) {
+          model.playerOneScore++;
+          $ballDiv.css( 'left', 350);
+          $ballDiv.css( 'top', 300);
+        } else if ((ballTop < 40) && (vertical === -1)) {
           vertical = 1;
+          model.playerTwoScore++;
+          $ballDiv.css( 'left', 350);
+          $ballDiv.css( 'top', 300);
         };
       };
 
-      switch (brickCollision) {
-        case 'top':
-          vertical *= -1;
-          break;
-        case 'bottom':
-          vertical *= -1;
-          break;
-        case 'left':
-          horizontal *= -1;
-          break;
-        case 'right':
-          horizontal *= -1;
-          break;
-        default:
-          break;
+      // switch (brickCollision) {
+      //   case 'top':
+      //     vertical *= -1;
+      //     break;
+      //   case 'bottom':
+      //     vertical *= -1;
+      //     break;
+      //   case 'left':
+      //     horizontal *= -1;
+      //     break;
+      //   case 'right':
+      //     horizontal *= -1;
+      //     break;
+      //   default:
+      //     break;
+      // }
+
+      if (paddleOneCollision) {
+        vertical = -1;
       }
 
-      if (paddleCollision) {
-        vertical = -1;
+      if (paddleTwoCollision) {
+        vertical = 1;
       }
     }, 100);
   },

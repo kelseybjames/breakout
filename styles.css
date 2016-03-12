@@ -22,8 +22,28 @@
   background-color: black;
   height: 20px;
   width: 120px;
-  top: 500px;
+  position: absolute;
+}
+
+.player-1 {
+  top: 550px;
   left: 300px;
+}
+
+.player-2 {
+  top: 30px;
+  left: 300px;
+}
+
+.score {
+  font-size: 48px;
+  left: 40px;
+  font-family: sans-serif;
+  position: absolute;
+}
+
+.score-2 {
+  top: 530px;
   position: absolute;
 }
 
